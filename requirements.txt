@@ -1,5 +1,3 @@
-X
-
 wikipedia-api
 scikit-learn
 nltk
