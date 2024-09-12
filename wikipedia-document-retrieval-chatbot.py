@@ -11,11 +11,15 @@ from nltk.tokenize import sent_tokenize, word_tokenize
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
 
-# Check if required nltk resources are available; download resource if not found
-nltk_resources = ['stopwords', 'punkt_tab', 'wordnet']
-for resource in nltk_resources:
+# Check if required nltk resources are available; download resources if not found.
+nltk_resources = {
+    'stopwords': 'corpora/stopwords',
+    'punkt': 'tokenizers/punkt',
+    'wordnet': 'corpora/wordnet'
+}
+for resource, path in nltk_resources.items():
     try:
-        nltk.data.find(f'corpora/{resource}')
+        nltk.data.find(path)
     except LookupError:
         print(f"{resource} not found. Downloading {resource}...")
         nltk.download(resource)
@@ -73,7 +77,7 @@ def retrieve_article():
     i = 0
     while i < 3:
         wiki_title = input('Wikipedia article to retrieve text from:\n>  ').strip()
-        if wiki_title.casefold() == 'exit': exit('byee!')
+        if wiki_title.casefold() == 'exit': exit('bye!')
 
         retrieval_state, wiki_article = get_article_text(wiki, wiki_title)
         if retrieval_state:
