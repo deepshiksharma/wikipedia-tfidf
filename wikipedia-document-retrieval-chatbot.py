@@ -10,6 +10,15 @@ from nltk.tokenize import sent_tokenize, word_tokenize
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
 
+# Check if required nltk resources are available; download resource if not found
+nltk_resources = ['stopwords', 'punkt_tab', 'wordnet']
+for resource in nltk_resources:
+    try:
+        nltk.data.find(f'corpora/{resource}')
+    except LookupError:
+        print(f"{resource} not found. Downloading {resource}...")
+        nltk.download(resource)
+        print(f'{resource} downloaded.')
 
 LEMMATIZER = WordNetLemmatizer()
 STOPWORDS_ENG = stopwords.words('english')
@@ -46,6 +55,17 @@ def main():
 
 
 def retrieve_article():
+    '''
+    Prompts the user to input a Wikipedia article title and attempts to retrieve its text.
+    Allows up to 3 attempts before defaulting to the "Python (programming language)" article.
+    If the user types 'exit', the function terminates the program.
+
+    Returns:
+        tuple:
+            wiki_title (str): title of the Wikipedia article that was fetched.
+            wiki_article (str or None): text of the retrieved Wikipedia article.
+    '''
+
     user_agent = 'RandomBot/0.0 (https://random.org/randombot/; randombot@random.org) generic-library/0.0'
     wiki = Wikipedia(language='en', user_agent=user_agent)
 
@@ -54,7 +74,7 @@ def retrieve_article():
         wiki_title = input('Wikipedia article to retrieve text from:\n>  ').strip()
         if wiki_title.casefold() == 'exit': exit('byee!')
 
-        retrieval_state, wiki_article = get_article(wiki, wiki_title)
+        retrieval_state, wiki_article = get_article_text(wiki, wiki_title)
         if retrieval_state:
             break
         else:
@@ -63,18 +83,31 @@ def retrieve_article():
     if not retrieval_state:
         wiki_title = 'Python (programming language)'
         print(f'Attempts to fetch article failed 3 times, defaulting to fetch the Wikipedia article on "{wiki_title}"')
-        retrieval_state, wiki_article = get_article(wiki, wiki_title)
+        retrieval_state, wiki_article = get_article_text(wiki, wiki_title)
 
     return wiki_title, wiki_article
 
 
-def get_article(wiki_api_object, article_title):
-    retrieval_state, article = False, None
+def get_article_text(wiki_api_object, article_title):
+    '''
+    Fetches text from a Wikipedia article.
+
+    Args:
+        wiki_api_object: Wikipedia API object
+        article_title (str): title of the Wikipedia article
+
+    Returns:
+        tuple:
+            retrieval_state (bool): True if the article was fetched successfully, otherwise False.
+            article_text (str or None): article text if retrieval was successful, otherwise None.
+    '''
+    
+    retrieval_state, article_text = False, None
 
     try:
         page = wiki_api_object.page(article_title)
         if page.exists():
-            article = page.text
+            article_text = page.text
             print(f'Successfully fetched the Wikipedia article on "{article_title}"')
             retrieval_state = True
         else:
@@ -83,7 +116,7 @@ def get_article(wiki_api_object, article_title):
     except Exception as e:
         print(f'An error occurred while fetching the article:\n{e}')
     
-    return retrieval_state, article
+    return retrieval_state, article_text
 
 
 def process_article(article):
