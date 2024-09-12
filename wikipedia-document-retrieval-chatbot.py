@@ -6,24 +6,9 @@ from wikipediaapi import Wikipedia
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
-import nltk
 from nltk.tokenize import sent_tokenize, word_tokenize
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
-
-# Check if required nltk resources are available; download resources if not found.
-nltk_resources = {
-    'stopwords': 'corpora/stopwords',
-    'punkt': 'tokenizers/punkt',
-    'wordnet': 'corpora/wordnet'
-}
-for resource, path in nltk_resources.items():
-    try:
-        nltk.data.find(path)
-    except LookupError:
-        print(f"{resource} not found. Downloading {resource}...")
-        nltk.download(resource)
-        print(f'{resource} downloaded.\n')
 
 LEMMATIZER = WordNetLemmatizer()
 STOPWORDS_ENG = stopwords.words('english')
