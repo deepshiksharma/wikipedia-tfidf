@@ -15,7 +15,7 @@ The required nltk packages for this program can be downloaded from within the Py
 ```py
 import nltk
 nltk.download('stopwords')
-#nltk.download('punkt')
+nltk.download('punkt')
 nltk.download('punkt_tab')
 nltk.download('wordnet')
 ```
