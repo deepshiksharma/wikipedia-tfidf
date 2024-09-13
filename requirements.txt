@@ -2,8 +2,7 @@ wikipedia-api
 scikit-learn
 nltk
 
-# Developed using these exact versions
-# python==3.12.6
+# Developed using these versions
 # wikipedia-api==0.7.1
 # scikit-learn==1.5.2
 # nltk==3.9.1
