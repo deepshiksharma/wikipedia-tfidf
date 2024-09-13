@@ -11,7 +11,7 @@ The [Wikipedia API][1] is used to fetch text from Wikipedia articles.
 [4]: https://en.wikipedia.org/wiki/Tf%E2%80%93idf
 
 ### nltk package dependencies
-The required nltk packages for this program can be downloaded from within the Python shell like this:
+The required nltk packages for this program can be downloaded from the Python shell like this:
 ```py
 import nltk
 nltk.download('stopwords')
