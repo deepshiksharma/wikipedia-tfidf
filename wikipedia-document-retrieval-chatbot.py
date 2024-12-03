@@ -129,7 +129,7 @@ def process_article(article):
         processed_sentence = ' '.join(processed_words) 
         processed_sentences[i] = processed_sentence
 
-        return original_sentences, processed_sentences
+    return original_sentences, processed_sentences
 
 
 def chatbot(original_, processed_, vectorizer_):
