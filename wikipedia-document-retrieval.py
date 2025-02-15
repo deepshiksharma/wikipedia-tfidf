@@ -15,7 +15,7 @@ STOPWORDS_ENG = stopwords.words('english')
 
 
 def main():
-    print('DOCUMENT RETRIEVAL BASED CHATBOT FOR WIKIPEDIA ARTICLES')
+    print('DOCUMENT RETRIEVAL FOR WIKIPEDIA ARTICLES')
     print('(type "exit" to quit the program)\n')
 
     wiki_title, wiki_article = retrieve_article()

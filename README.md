@@ -1,5 +1,5 @@
-# Wikipedia Document Retrieval Chatbot
-Document-retrieval-based chatbot for Wikipedia articles.
+# Wikipedia Document Retrieval
+Document retrieval for Wikipedia articles.
 
 The [Wikipedia API][1] is used to retrieve text from Wikipedia articles.
 [nltk][2] is used to pre-process text.
