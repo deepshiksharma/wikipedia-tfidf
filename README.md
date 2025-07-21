@@ -1,10 +1,8 @@
-# Wikipedia Document Retrieval
-Document retrieval for Wikipedia articles.
+# Retrieval-Based Question Answering from Wikipedia Articles
+Allows users to interactively ask questions about a specific Wikipedia article. 
 
-The [Wikipedia API][1] is used to retrieve text from Wikipedia articles.
-[nltk][2] is used to pre-process text.
-[TfidfVectorizer][3] is used to implement [Term Frequency–Inverse Document Frequency][4] on the processed text.
-[Cosine similarity][5] is then used to compute the similarity between the user query and document vectors.
+The [Wikipedia API][1] is used to retrieve text, preprocessed using [nltk][2].
+Using [TfidfVectorizer][3], sentences from the article are converted into TF-IDF ([Term Frequency–Inverse Document Frequency][4]) vectors. [Cosine similarity][5] is then computed to find the sentence most similar to the user’s query.
 
 [1]: https://pypi.org/project/Wikipedia-API/
 [2]: https://www.nltk.org/
