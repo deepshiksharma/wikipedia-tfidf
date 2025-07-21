@@ -1,7 +1,7 @@
 # Retrieval-Based Question Answering from Wikipedia Articles
 Allows users to interactively ask questions about a specific Wikipedia article. 
 
-The [Wikipedia API][1] is used to retrieve text, preprocessed using [nltk][2]. <br>
+The [Wikipedia API][1] is used to retrieve text, preprocessed using [nltk][2].
 Using [TfidfVectorizer][3], sentences from the article are converted into TF-IDF ([Term Frequency–Inverse Document Frequency][4]) vectors. [Cosine similarity][5] is then computed to find the sentence most similar to the user’s query.
 
 [1]: https://pypi.org/project/Wikipedia-API/
