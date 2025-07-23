@@ -15,12 +15,12 @@ STOPWORDS_ENG = stopwords.words('english')
 
 
 def main():
-    print('DOCUMENT RETRIEVAL FOR WIKIPEDIA ARTICLES')
+    print('RETRIEVAL-BASED QUESTION ANSWERING FROM WIKIPEDIA ARTICLES')
     print('(type "exit" to quit the program)\n')
 
-    wiki_title, wiki_article = retrieve_article()
+    wiki_title, wiki_article = get_article()
     original_sent_MASTER, processed_sent_MASTER = process_article(wiki_article)
-    print('Text pre-processing completed.\n')
+    print('Text preprocessing completed.\n')
     
     print(f'Ask me questions about {wiki_title}')
 
@@ -28,7 +28,7 @@ def main():
 
     while True:
         user_query = input('Question:  ').rstrip('?')
-        if user_query.casefold() == 'exit': exit('bye!')
+        if user_query.casefold() == 'exit': exit('Bye!')
         else:
             original_sent, processed_sent = deepcopy(original_sent_MASTER), deepcopy(processed_sent_MASTER)
             original_sent.append(user_query)
@@ -44,16 +44,16 @@ def main():
             chatbot(original_=original_sent, processed_=processed_sent, vectorizer_=TfidfVec)
 
 
-def retrieve_article():
+def get_article():
     '''
-    Prompts the user to input a Wikipedia article title and attempts to retrieve its text.
+    Prompts the user to input a Wikipedia article title, to fetch text from.
     Allows up to 3 attempts before defaulting to the "Python (programming language)" article.
-    If the user types 'exit', the function terminates the program.
+    If the user types "exit", the function terminates the program.
 
     Returns:
         tuple:
-            wiki_title (str): title of the Wikipedia article that was fetched.
-            wiki_article (str or None): text of the retrieved Wikipedia article.
+            wiki_title (str): title of the article.
+            wiki_article (str or None): article text.
     '''
 
     user_agent = 'RandomBot/0.0 (https://random.org/randombot/; randombot@random.org) generic-library/0.0'
@@ -61,8 +61,8 @@ def retrieve_article():
 
     i = 0
     while i < 3:
-        wiki_title = input('Wikipedia article to retrieve text from:\n>  ').strip()
-        if wiki_title.casefold() == 'exit': exit('bye!')
+        wiki_title = input('Wikipedia article to get text from:\n>  ').strip()
+        if wiki_title.casefold() == 'exit': exit('Bye!')
 
         retrieval_state, wiki_article = get_article_text(wiki, wiki_title)
         if retrieval_state:
@@ -72,7 +72,7 @@ def retrieve_article():
 
     if not retrieval_state:
         wiki_title = 'Python (programming language)'
-        print(f'Attempts to fetch article failed 3 times, defaulting to fetch the Wikipedia article on "{wiki_title}"')
+        print(f'Attempts to get article failed 3 times, defaulting to the Wikipedia article on "{wiki_title}"')
         retrieval_state, wiki_article = get_article_text(wiki, wiki_title)
 
     return wiki_title, wiki_article
