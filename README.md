@@ -1,7 +1,7 @@
 # Retrieval-Based Question Answering from Wikipedia Articles
 Allows users to interactively ask questions about a specific Wikipedia article. 
 
-Sentences from the article are converted into TF-IDF ([Term Frequency–Inverse Document Frequency][1]) vectors using [TfidfVectorizer][2]. <br>
+Sentences from the article are converted into TF-IDF ([Term Frequency–Inverse Document Frequency][1]) vectors using [TfidfVectorizer][2].
 [Cosine similarity][3] is then computed to find the sentence most similar to the user’s query. <br>
 The [Wikipedia API][4] is used to fetch text; [NLTK][5] is used for text preprocessing.
 
